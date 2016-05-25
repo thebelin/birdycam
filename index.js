@@ -17,7 +17,7 @@ app.use(express.static('html'));
 // a route to tell users how many viewers there are
 app.get('/usercount', function (req, res) {
   server.getConnections(function (error, count) {
-    if (count) res.send({count: count})
+    if (count) res.send({count: count});
   });
 });
 
