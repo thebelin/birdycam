@@ -13,12 +13,14 @@
 
 <link href='https://fonts.googleapis.com/css?family=Francois+One' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+
 <style>
 body {
   text-align: center;
   font-family: 'Francois One', sans-serif;
   margin: 0px;
+  box-sizing: border-box;
 }
 .overlay {
   position: absolute;
@@ -42,13 +44,13 @@ h1 {
 }
 .minPlayer {
   width: 800px;
-  height: 476px;
   max-width: 90%;
-  max-height: 80%;
+  max-height: 90%;
   border-radius: 1em;
   border: brown solid 5px;
   z-index: 10;
   margin: auto;
+  overflow: hidden;
 }
 .playerImage {
   width: 100%;
@@ -68,6 +70,12 @@ h1 {
   padding:5px;
   border-top-left-radius: .8em;
   border-top-right-radius: .8em;
+  box-sizing: border-box;
+  text-align: center;
+}
+.control {
+  padding-left: 1em;
+  padding-right: 1em;
 }
 </style>
     
@@ -76,7 +84,8 @@ h1 {
 <h1>Belin's Bird Feed</h1>
 <div id="vidPlayer" class="minPlayer">
   <div class="controls">
-    <a id="btnFullscreen"><i class="fa fa-film"></i></a>
+    <span class="control"><a id="btnFullscreen"><i class="fa fa-film"></i></a></span>
+    <span class="control"><i class="fa fa-user-times"></i><span id="userCount"></span></span>
   </div>
   <img class="playerImage" style="-webkit-user-select: none" src="index1.jpg" />
 </div>
@@ -86,7 +95,8 @@ $(document).ready(function () {
   var self = this;
   this.dom = {
     fullscreen: $(document.getElementById('btnFullscreen')),
-    player: $(document.getElementById('vidPlayer'))
+    player: $(document.getElementById('vidPlayer')),
+    userCount: $(document.getElementById('userCount'))
   };
 
   // make the controls work
@@ -97,6 +107,13 @@ $(document).ready(function () {
       self.dom.player.addClass('minPlayer').removeClass('fullScreen');
     }
   });
+
+  // monitor for new users and adjust the counter accordingly
+  window.setInterval(function () {
+    $.get('/usercount', function (userData) {
+      if (userData.count) self.dom.userCount.html(userData.count);
+    });
+  }, 5000);
 });
 </script>
 </html>
