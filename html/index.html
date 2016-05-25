@@ -1,0 +1,46 @@
+<html>
+<link href='https://fonts.googleapis.com/css?family=Francois+One' rel='stylesheet' type='text/css'>
+
+<style>
+body {
+  text-align: center;
+  font-family: 'Francois One', sans-serif;
+  margin: 0px;
+}
+.overlay {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: no-repeat url('/images/bird_nest.jpg') fixed;
+  background-size: cover;
+  z-index:-1;
+}
+h1 {
+  color: #fff;
+  background-color: #fff;
+  width: 100%;
+  z-index: 9;
+  text-shadow: 1px 0 0 brown,
+  0 1px 0 brown,
+  -1px 0 0 brown,
+  0 -1px 0 brown;
+}
+.vidPlayer {
+  width: 800px;
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 1em;
+  border: brown solid 5px;
+  z-index: 10;
+}
+
+</style>
+<body>
+<div class="overlay"></div>
+<h1>Belin's BirdyCam</h1>
+
+<img class="vidPlayer" style="-webkit-user-select: none" src="index1.jpg" />
+
+</html>

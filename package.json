@@ -1,0 +1,22 @@
+{
+  "name": "birdycam",
+  "version": "1.0.0",
+  "description": "A cam forwarding tool for mjpeg streaming",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.13.4",
+    "mjpeg-proxy": "^0.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "raspberry",
+    "pi",
+    "streaming",
+    "mpeg"
+  ],
+  "author": "Belin Fieldson @thebelin",
+  "license": "MIT"
+}
