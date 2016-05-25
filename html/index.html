@@ -1,6 +1,7 @@
 <html>
 <link href='https://fonts.googleapis.com/css?family=Francois+One' rel='stylesheet' type='text/css'>
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script> 
 <style>
 body {
   text-align: center;
@@ -19,7 +20,7 @@ body {
 }
 h1 {
   color: #fff;
-  background-color: #fff;
+  background-color: #000;
   width: 100%;
   z-index: 9;
   text-shadow: 1px 0 0 brown,
@@ -27,20 +28,63 @@ h1 {
   -1px 0 0 brown,
   0 -1px 0 brown;
 }
-.vidPlayer {
+.minPlayer {
   width: 800px;
+  height: 476px;
   max-width: 90%;
   max-height: 80%;
   border-radius: 1em;
   border: brown solid 5px;
   z-index: 10;
+  margin: auto;
 }
-
+.playerImage {
+  width: 100%;
+  border-bottom-left-radius: .8em;
+  border-bottom-right-radius: .8em;
+}
+.fullScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.controls {
+  background-color: #000;
+  color: #fff;
+  padding:5px;
+  border-top-left-radius: .8em;
+  border-top-right-radius: .8em;
+}
 </style>
+
 <body>
 <div class="overlay"></div>
-<h1>Belin's BirdyCam</h1>
+<h1>Belin's Bird Feed</h1>
+<div id="vidPlayer" class="minPlayer">
+  <div class="controls">
+    <a id="btnFullscreen"><i class="fa fa-film"></i></a>
+  </div>
+  <img class="playerImage" style="-webkit-user-select: none" src="index1.jpg" />
+</div>
 
-<img class="vidPlayer" style="-webkit-user-select: none" src="index1.jpg" />
+<script>
+$(document).ready(function () {
+  var self = this;
+  this.dom = {
+    fullscreen: $(document.getElementById('btnFullscreen')),
+    player: $(document.getElementById('vidPlayer'))
+  };
 
+  // make the controls work
+  this.dom.fullscreen.on('click', function (eventObj) {
+    if (self.dom.player.hasClass('minPlayer')) {
+      self.dom.player.addClass('fullScreen').removeClass('minPlayer');
+    } else {
+      self.dom.player.addClass('minPlayer').removeClass('fullScreen');
+    }
+  });
+});
+</script>
 </html>
