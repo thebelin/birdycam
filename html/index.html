@@ -17,185 +17,70 @@
   <meta property="og:image" content="http://www.slaminator.com/images/bird_nest.jpg" />
   <meta property="og:url" content="http://www.slaminator.com/" />
   <meta property="og:site_name" content="Belin's Bird Feed" />
+
+  <link href='https://fonts.googleapis.com/css?family=Kaushan+Script|Lato' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/styles/main.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/scripts/birdycam.js"></script>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
 </head>
 
-<link href='https://fonts.googleapis.com/css?family=Kaushan+Script|Lato' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-
-<style>
-body {
-  text-align: center;
-  font-family: 'Kaushan Script', cursive;
-  margin: 0px;
-  box-sizing: border-box;
-}
-a {
-  color: #fff;
-}
-.overlay {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  background: no-repeat url('/images/bird_nest.jpg') fixed;
-  background-size: cover;
-  z-index:-1;
-}
-h1 {
-  color: #fff;
-  background-color: #000;
-  width: 100%;
-  z-index: 9;
-  text-shadow: 1px 0 0 brown,
-  0 1px 0 brown,
-  -1px 0 0 brown,
-  0 -1px 0 brown;
-  position: fixed;
-  top: 0;
-  margin-top: 0;
-}
-.minPlayer {
-  width: 800px;
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 1.15em;
-  border: brown solid 5px;
-  z-index: 10;
-  margin: auto;
-  margin-top: 3em;
-  overflow: hidden;
-}
-#playerImage {
-  width: 100%;
-  border-bottom-left-radius: .8em;
-  border-bottom-right-radius: .8em;
-  z-index: 10;
-  background-color: #000;
-}
-.fullScreen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  margin-top: 2.5em;
-}
-.controls {
-  background-color: #000;
-  color: #fff;
-  padding:5px;
-  border-top-left-radius: .8em;
-  border-top-right-radius: .8em;
-  box-sizing: border-box;
-  text-align: center;
-  font-size: 1.5em;
-}
-.control {
-  padding-left: 1em;
-  padding-right: 1em;
-  color: #fff;
-}
-
-#playerStatus {
-  margin-left: 3px;
-}
-.explanation {
-  padding: 1em;
-  max-width: 40em;
-  background-color: #fff;
-  border-radius: 1.15em;
-  border: brown solid 5px;
-  margin: auto;
-  margin-top: 1em;
-  font-family: 'Lato', sans-serif;
-  margin-bottom: 5em;
-}
-
-@media 
-(-webkit-min-device-pixel-ratio: 2), 
-(min-resolution: 192dpi) { 
-  /* Retina-specific stuff here */
-  .minPlayer {
-    height: 480px;
-  }
-  .playerImage {
-    width: 100%;
-  }
-}
-ins {
-  position: fixed;
-  bottom: 0px;
-  left: 0px;
-  width: 100%;
-}
-</style>
-    
 <body>
-<div class="overlay"></div>
-<h1>Belin's Bird Feed</h1>
-<div id="vidPlayer" class="minPlayer">
-  <div class="controls">
-    <span title="Toggle Full Screen" class="control"><a id="btnFullscreen" href="#"><i class="fa fa-film"></i></a></span>
-    <span title="Users Watching" class="control"><i class="fa fa-user-times"></i><span id="userCount">1</span></span>
-    <span title="Player Status" class="control"><i class="fa fa-clock-o" id="statusIcon"></i><span id="playerStatus">connecting</span></span>
+
+  <div class="overlay"></div>
+
+  <h1>Belin's Bird Feed</h1>
+
+  <div class="main">
+
+    <div id="vidPlayer" class="minPlayer">
+
+      <div class="controls">
+        <span title="Toggle Full Screen" class="control">
+          <a id="btnFullscreen" href="#"><i class="fa fa-film"></i></a>
+        </span>
+        <span title="Users Watching" class="control">
+          <i class="fa fa-user-times"></i><span id="userCount">1</span>
+        </span>
+        <span title="Player Status" class="control">
+          <i class="fa fa-clock-o" id="statusIcon"></i>
+          <span id="playerStatus">connecting</span>
+        </span>
+      </div>
+
+      <img id="playerImage" style="-webkit-user-select: none" src="index1.jpg" />
+
+    </div>
+
+    <div id="chatModule">
+      <div id="uiMessage"></div>
+      <ul id="messages"></ul>
+      <form action="">
+        <textarea id="m" autocomplete="off" placeholder="Your Message Here" ></textarea>
+        <input id="nickname" placeholder="Nickname" />
+        <button>Send</button>
+      </form>
+    </div>
+
   </div>
-  <img id="playerImage" style="-webkit-user-select: none" src="index1.jpg" />
-</div>
-<div class="explanation">Ms. Robin Harried built a nest in an accessible location. I built a birdycam with my Raspberry Pi and then spun up an AWS server to host the stream. The AWS server is running node.js and it proxies the connections to my Raspberry Pi. That way I can support many connections on the AWS server, if lots of people want to watch Ms. Robin do her single mom thing.</div>
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7564711490502428"
-     data-ad-slot="6424272365"
-     data-ad-format="auto"></ins>
+  <div class="main">
+      <div class="explanation">Ms. Robin Harried built a nest in an accessible location. I built a birdycam with my Raspberry Pi and then spun up an AWS server to host the stream. The AWS server is running node.js and it proxies the connections to my Raspberry Pi. That way I can support many connections on the AWS server if lots of people want to watch Ms. Robin do her single mom thing (possibly with chicks).</div>
+  </div>
 
-<script>
-$(document).ready(function () {
-  var self = this;
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-7564711490502428"
+       data-ad-slot="6424272365"
+       data-ad-format="auto"></ins>
 
-  // For user count
-  this.getUserCount = function () {
-    $.get('/usercount', function (userData) {
-      if (userData.count) self.dom.userCount.html(userData.count);
-    });
-  };
-  this.getUserCount();
+  <!-- BirdyCam Advert -->
+  <script>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
 
-  // monitor for new users and adjust the counter accordingly
-  window.setInterval(this.getUserCount, 5000);
-
-  // preload all the jQuery components
-  this.dom = {
-    playerImage:  $(document.getElementById('playerImage')),
-    fullscreen:   $(document.getElementById('btnFullscreen')),
-    player:       $(document.getElementById('vidPlayer')),
-    userCount:    $(document.getElementById('userCount')),
-    playerStatus: $(document.getElementById('playerStatus')),
-    statusIcon:   $(document.getElementById('statusIcon'))
-  };
-
-  // make the controls work
-  this.dom.fullscreen.on('click', function (eventObj) {
-    if (self.dom.player.hasClass('minPlayer')) {
-      self.dom.player.addClass('fullScreen').removeClass('minPlayer');
-    } else {
-      self.dom.player.addClass('minPlayer').removeClass('fullScreen');
-    }
-  });
-
-  // Show the status of the video playback to the user
-  this.dom.playerImage.ready(function (eventObj) {
-    this.dom.playerStatus.html('playing');
-  });
-
-});
-</script>
-
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- BirdyCam Advert -->
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
+</body>
 </html>

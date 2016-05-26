@@ -4,9 +4,12 @@
   "description": "A cam forwarding tool for mjpeg streaming",
   "main": "index.js",
   "dependencies": {
+    "body-parser": "^1.15.1",
     "express": "^4.13.4",
-    "mjpeg-proxy": "^0.2.0"
+    "mjpeg-proxy": "^0.2.0",
+    "socket.io": "^1.4.6"
   },
+  "repository": "https://github.com/thebelin/birdycam",
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

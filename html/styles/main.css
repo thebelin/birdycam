@@ -1,0 +1,166 @@
+body {
+  text-align: center;
+  font-family: 'Kaushan Script', cursive;
+  margin: 0px;
+  box-sizing: border-box;
+}
+a {
+  color: #fff;
+}
+#vidPlayer {
+  background-color: #000;
+}
+.overlay {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: no-repeat url('/images/bird_nest.jpg') fixed;
+  background-size: cover;
+  z-index:-1;
+}
+h1 {
+  color: #fff;
+  background-color: #000;
+  width: 100%;
+  z-index: 9;
+  text-shadow: 1px 0 0 brown,
+  0 1px 0 brown,
+  -1px 0 0 brown,
+  0 -1px 0 brown;
+  position: fixed;
+  top: 0;
+  margin-top: 0;
+  font-family: 'Kaushan Script', cursive;
+}
+.main {
+  margin: auto;
+  display:inline-block;
+}
+.minPlayer {
+  width: 60%;
+  border: brown solid 1px;
+  z-index: 10;
+  margin: auto;
+  margin-top: 3.2em;
+  overflow: hidden;
+  float: left;
+  margin-right: 4px;
+  margin-left: 4px;
+  min-height: 280px;
+}
+#playerImage {
+  width: 100%;
+  z-index: 10;
+  background-color: #000;
+}
+.fullScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin-top: 2.5em;
+}
+.controls {
+  background-color: #000;
+  color: #fff;
+  padding:5px;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 1.5em;
+}
+.control {
+  padding-left: 1em;
+  padding-right: 1em;
+  color: #fff;
+}
+
+#playerStatus {
+  margin-left: 3px;
+}
+.explanation {
+  padding: 1em;
+  max-width: 40em;
+  background-color: #fff;
+  border: brown solid 5px;
+  margin: auto;
+  margin-top: 1em;
+  font-family: 'Lato', sans-serif;
+  margin-bottom: 5em;
+  display: inline-block;
+}
+
+@media 
+(-webkit-min-device-pixel-ratio: 2), 
+(min-resolution: 192dpi) { 
+  /* Retina-specific stuff here */
+  .minPlayer {
+    height: 480px;
+  }
+  .playerImage {
+    width: 100%;
+  }
+}
+ins {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+}
+
+#chatModule {
+  float: right;
+  width: 33%;
+  margin-top: 3.2em;
+  margin-right: 4px;
+  border: brown solid 1px;
+  font-family: 'Lato', sans-serif;
+  padding: .5em;
+  background-color: #fff;
+}
+.nickname {
+  margin-bottom: -1em;
+  float: left;
+  text-align: left;
+  width: 7em;
+  font-weight: bold;
+  font-family: 'Kaushan Script', cursive;
+}
+
+#uiMessage {
+  height: 4em;
+  margin-bottom: -4em;
+  padding: .5em;
+  opacity: .9;
+  background-color: #f00;
+  color: #fff;
+  text-shadow: 0 0 3px #000;
+  display: none;
+}
+.userMessage {
+  float: right;
+  text-align: right;
+  width: 100%;
+  text-indent: 7em;
+}
+.userMessage:nth-child(odd) {
+  background-color: #c2c2c2;
+}
+
+#messages {
+  list-style-type: none; 
+  margin: 0;
+  padding: 0;
+  height: 320px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-size: .8em;
+}
+#messages li { padding: 5px 10px; }
+#messages li:nth-child(odd) { background: #eee; }
+#m {
+  width: 100%;
+  height: 4em;
+}
