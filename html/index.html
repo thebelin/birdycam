@@ -55,10 +55,12 @@ h1 {
   margin: auto;
   overflow: hidden;
 }
-.playerImage {
+#playerImage {
   width: 100%;
   border-bottom-left-radius: .8em;
   border-bottom-right-radius: .8em;
+  z-index: 10;
+  background-color: #000;
 }
 .fullScreen {
   position: fixed;
@@ -81,6 +83,11 @@ h1 {
   padding-right: 1em;
   color: #fff;
 }
+
+#playerStatus {
+  margin-left: 3px;
+}
+
 @media 
 (-webkit-min-device-pixel-ratio: 2), 
 (min-resolution: 192dpi) { 
@@ -106,10 +113,11 @@ ins {
 <h1>Belin's Bird Feed</h1>
 <div id="vidPlayer" class="minPlayer">
   <div class="controls">
-    <span class="control"><a id="btnFullscreen" href="#"><i class="fa fa-film"></i></a></span>
-    <span class="control"><i class="fa fa-user-times"></i><span id="userCount"></span></span>
+    <span title="Toggle Full Screen" class="control"><a id="btnFullscreen" href="#"><i class="fa fa-film"></i></a></span>
+    <span title="Users Watching" class="control"><i class="fa fa-user-times"></i><span id="userCount">1</span></span>
+    <span title="Player Status" class="control"><i class="fa fa-clock-o" id="statusIcon"></i><span id="playerStatus">connecting</span></span>
   </div>
-  <img class="playerImage" style="-webkit-user-select: none" src="index1.jpg" />
+  <img id="playerImage" style="-webkit-user-select: none" src="index1.jpg" />
 </div>
 
 <ins class="adsbygoogle"
@@ -121,10 +129,26 @@ ins {
 <script>
 $(document).ready(function () {
   var self = this;
+
+  // For user count
+  this.getUserCount = function () {
+    $.get('/usercount', function (userData) {
+      if (userData.count) self.dom.userCount.html(userData.count);
+    });
+  };
+  this.getUserCount();
+
+  // monitor for new users and adjust the counter accordingly
+  window.setInterval(this.getUserCount, 5000);
+
+  // preload all the jQuery components
   this.dom = {
-    fullscreen: $(document.getElementById('btnFullscreen')),
-    player: $(document.getElementById('vidPlayer')),
-    userCount: $(document.getElementById('userCount'))
+    playerImage:  $(document.getElementById('playerImage')),
+    fullscreen:   $(document.getElementById('btnFullscreen')),
+    player:       $(document.getElementById('vidPlayer')),
+    userCount:    $(document.getElementById('userCount')),
+    playerStatus: $(document.getElementById('playerStatus')),
+    statusIcon:   $(document.getElementById('statusIcon'))
   };
 
   // make the controls work
@@ -136,12 +160,11 @@ $(document).ready(function () {
     }
   });
 
-  // monitor for new users and adjust the counter accordingly
-  window.setInterval(function () {
-    $.get('/usercount', function (userData) {
-      if (userData.count) self.dom.userCount.html(userData.count);
-    });
-  }, 5000);
+  // Show the status of the video playback to the user
+  this.dom.playerImage.ready(function (eventObj) {
+    this.dom.playerStatus.html('playing');
+  });
+
 });
 </script>
 
