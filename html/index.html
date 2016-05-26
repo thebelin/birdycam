@@ -1,5 +1,13 @@
 <html>
+<!doctype html>
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Belin's Bird Feed, featuring Robin Harried</title>
+
   <!-- Social media images -->
   <link rel="image_src" href="http://www.slaminator.com/images/bird_nest.jpg" />
   
@@ -87,6 +95,13 @@ h1 {
 #playerStatus {
   margin-left: 3px;
 }
+.explanation {
+  max-width: 40em;
+  background-color: #fff;
+  border-radius: 1.15em;
+  border: brown solid 5px;
+  margin: auto;
+}
 
 @media 
 (-webkit-min-device-pixel-ratio: 2), 
@@ -119,7 +134,7 @@ ins {
   </div>
   <img id="playerImage" style="-webkit-user-select: none" src="index1.jpg" />
 </div>
-
+<div class="explanation">These birds built a nest in an accessable location. I built a birdycam with my Raspberry Pi and then spun up an AWS server to host the stream. The AWS server is running node.js and it proxies the connections to my Raspberry Pi. That way I can support many connections on the AWS server, if lots of people want to watch Ms. Robin do her single mom thing.</div>
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-7564711490502428"
