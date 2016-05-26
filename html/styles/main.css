@@ -120,6 +120,18 @@ ins {
   padding: .5em;
   background-color: #fff;
 }
+#chatModule input {
+  font-size: 1.2em;
+}
+#chatModule input[type="submit"] {
+  background-color: #000;
+  color: #fff;
+  border-radius: 1em;
+  padding: .5em 3em;
+  font-weight: bold;
+}
+
+
 .nickname {
   margin-bottom: -1em;
   float: left;
@@ -162,5 +174,5 @@ ins {
 #messages li:nth-child(odd) { background: #eee; }
 #m {
   width: 100%;
-  height: 4em;
+  height: 2em;
 }
