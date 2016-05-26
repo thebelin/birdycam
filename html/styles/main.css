@@ -109,7 +109,13 @@ ins {
   left: 0px;
   width: 100%;
 }
-
+#gitlink {
+  z-index: 1000;
+  font-size: 2em;
+  position: fixed;
+  top: 8px;
+  right: 8px;
+}
 #chatModule {
   float: right;
   width: 33%;
@@ -121,24 +127,34 @@ ins {
   background-color: #fff;
 }
 #chatModule input {
-  font-size: 1.2em;
+  font-size: 1em;
 }
 #chatModule input[type="submit"] {
   background-color: #000;
   color: #fff;
   border-radius: 1em;
-  padding: .5em 3em;
+  padding: .5em 1em;
   font-weight: bold;
+  float: right;
+}
+#nickname {
+  float:left;
+  margin-top: .5em;
+}
+.timestamp {
+  float: left;
+  clear: both;
+  font-size:.8em;
+  margin-bottom: 1em;
 }
 
-
 .nickname {
-  margin-bottom: -1em;
   float: left;
   text-align: left;
   width: 7em;
   font-weight: bold;
   font-family: 'Kaushan Script', cursive;
+  clear: left;
 }
 
 #uiMessage {
@@ -156,11 +172,12 @@ ins {
   text-align: right;
   width: 100%;
   text-indent: 7em;
+  margin-top: -2em;
 }
-.userMessage:nth-child(odd) {
+/*.userMessage:nth-child(odd) {
   background-color: #c2c2c2;
 }
-
+*/
 #messages {
   list-style-type: none; 
   margin: 0;

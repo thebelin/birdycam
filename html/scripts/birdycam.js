@@ -64,6 +64,9 @@ var _BirdyChat = {
     // a bit tracking the state of the preload
       preloaded = false,
 
+    // Notification noise for chats
+      audio = new Audio('/sounds/robin_sound.mp3'),
+
     // scrolls to the bottom of the messages
       updateScroll = function () {
         var element = document.getElementById("messages");
@@ -72,10 +75,24 @@ var _BirdyChat = {
 
     // A message
       showMessage = function (msg) {
+        var entryDate = new Date(msg.entryDate)
         $dom.messages
           .append($('<span>').text(msg.nickname).addClass('nickname'))
+          
+          .append($('<time>').text(
+            entryDate.getMonth() + '/' + entryDate.getDate() + 
+            '/' + entryDate.getFullYear() + ' ' + 
+            entryDate.getHours() + ':' + entryDate.getMinutes())
+            .addClass('timestamp timeago')
+            .attr('datetime', entryDate.toISOString()))
+
           .append($('<span>').text(msg.message).addClass('userMessage'));
+
+        // Scroll to the bottom
         updateScroll();
+
+        // Update the timestamps
+        jQuery("time.timeago").timeago();
       },
 
     // a ui message
@@ -126,7 +143,8 @@ var _BirdyChat = {
     });
 
     // socket.io connectors to make messaging work
-    socket.on('chat message', function (msg) {  
+    socket.on('chat message', function (msg) {
+      audio.play();
       showMessage(msg);
     });
 
