@@ -58,7 +58,9 @@ var _BirdyChat = {
         messages:   $(document.getElementById('messages')),
         nickname:   $(document.getElementById('nickname')),
         formObj:    $('form'),
-        uiMessage:  $(document.getElementById('uiMessage'))
+        uiMessage:  $(document.getElementById('uiMessage')),
+        volumeOff:  $(document.getElementById('volumeOff')),
+        volumeOn:   $(document.getElementById('volumeOn'))
       },
 
     // a bit tracking the state of the preload
@@ -66,6 +68,9 @@ var _BirdyChat = {
 
     // Notification noise for chats
       audio = new Audio('/sounds/robin_sound.mp3'),
+
+    // Whether the audio is muted
+      muted = false,
 
     // scrolls to the bottom of the messages
       updateScroll = function () {
@@ -144,10 +149,12 @@ var _BirdyChat = {
 
     // socket.io connectors to make messaging work
     socket.on('chat message', function (msg) {
-      audio.play();
+      // Only play audio if the mute isn't enabled
+      if (!muted) audio.play();
       showMessage(msg);
     });
 
+    // This is the loader for when a connection is made
     socket.on('chat connection', function (messages) {
       if (!preloaded) {
         preloaded = true;
@@ -157,6 +164,18 @@ var _BirdyChat = {
       }
     });
     
+    // volume controls
+    $dom.volumeOn.on('click', function () {
+      $dom.volumeOn.hide();
+      $dom.volumeOff.show();
+      muted = true;
+    });
+    $dom.volumeOff.on('click', function () {
+      $dom.volumeOn.show();
+      $dom.volumeOff.hide();
+      muted = false;
+    });
+
   }
 };
 

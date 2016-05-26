@@ -137,6 +137,23 @@ ins {
   font-weight: bold;
   float: right;
 }
+#volumeOff, #volumeOn  {
+  float: right;
+  margin-right: .5em;
+  margin-top:.1em;
+  font-size: 2em;
+  text-align: left;
+  height: 40px;
+  width: 40px;
+  z-index: 1;
+}
+.fa-ban {
+  margin-left: -.8em;
+  color: #f00;
+}
+#volumeOff {
+  display: none;
+}
 #nickname {
   float:left;
   margin-top: .5em;
