@@ -123,7 +123,6 @@ ins {
   margin-right: 4px;
   border: brown solid 1px;
   font-family: 'Lato', sans-serif;
-  padding: .5em;
   background-color: #fff;
 }
 #chatModule input {
@@ -133,9 +132,13 @@ ins {
   background-color: #000;
   color: #fff;
   border-radius: 1em;
-  padding: .5em 1em;
+  padding: .3em 1em;
   font-weight: bold;
   float: right;
+  margin-top: .2em;
+}
+#chatModule > form {
+  padding: .2em;
 }
 #volumeOff, #volumeOn  {
   float: right;
@@ -198,7 +201,7 @@ ins {
 #messages {
   list-style-type: none; 
   margin: 0;
-  padding: 0;
+  padding: .2em;
   height: 320px;
   overflow-y: auto;
   overflow-x: hidden;
