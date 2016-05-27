@@ -109,12 +109,20 @@ ins {
   left: 0px;
   width: 100%;
 }
-#gitlink {
+#gitlink, #donateButton {
   z-index: 1000;
   font-size: 2em;
   position: fixed;
   top: 8px;
   right: 8px;
+  width: 2em;
+  text-align: right;
+}
+#donateButton {
+  left: 8px;
+  right: initial;
+  width: 2em;
+  text-align: left;
 }
 #chatModule {
   float: right;
@@ -191,7 +199,7 @@ ins {
   float: right;
   text-align: right;
   width: 100%;
-  text-indent: 7em;
+  text-indent: 8em;
   margin-top: -2em;
 }
 /*.userMessage:nth-child(odd) {

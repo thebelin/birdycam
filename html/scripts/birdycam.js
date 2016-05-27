@@ -57,7 +57,7 @@ var _BirdyChat = {
         messageBox: $(document.getElementById('m')),
         messages:   $(document.getElementById('messages')),
         nickname:   $(document.getElementById('nickname')),
-        formObj:    $('form'),
+        formObj:    $(document.getElementById('messagesForm')),
         uiMessage:  $(document.getElementById('uiMessage')),
         volumeOff:  $(document.getElementById('volumeOff')),
         volumeOn:   $(document.getElementById('volumeOn'))

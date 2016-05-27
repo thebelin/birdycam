@@ -38,6 +38,14 @@
 
   <a id="gitlink" title="Fork Me On GitHub" href="https://github.com/thebelin/birdycam" target="_blank"><i class="fa fa-github"></i></a>
 
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" id="donateButton">
+  <input type="hidden" name="cmd" value="_s-xclick">
+  <input type="hidden" name="hosted_button_id" value="FXKKRURZX73K2">
+  <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+  <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+  </form>
+
+
   <div class="main">
 
     <div id="vidPlayer" class="minPlayer">
@@ -62,7 +70,7 @@
     <div id="chatModule">
       <div id="uiMessage"></div>
       <ul id="messages"></ul>
-      <form action="">
+      <form action="" id="messagesForm">
         <input id="m" autocomplete="off" placeholder="Your Message Here" />
         <input id="nickname" placeholder="Nickname" />
         <input type="submit" value="Send" />
@@ -79,7 +87,9 @@
 
   </div>
   <div class="main">
-      <div class="explanation">Ms. Robin Harried built a nest in an accessible location. I built a birdycam with my Raspberry Pi and then spun up an AWS server to host the stream. The AWS server is running node.js and it proxies the connections to my Raspberry Pi. That way I can support many connections on the AWS server if lots of people want to watch Ms. Robin do her single mom thing (possibly with chicks).</div>
+      <div class="explanation">I built a birdycam with my Raspberry Pi and then spun up an AWS server to host the stream. The AWS server is running node.js and it proxies the connections to my Raspberry Pi.<br />
+      The babies have hatched, so now we get to watch them learn to be birds!
+      </div>
   </div>
 
   <ins class="adsbygoogle"
