@@ -10,7 +10,9 @@ var _BirdyCam = {
         player:       $(document.getElementById('vidPlayer')),
         userCount:    $(document.getElementById('userCount')),
         playerStatus: $(document.getElementById('playerStatus')),
-        statusIcon:   $(document.getElementById('statusIcon'))
+        statusIcon:   $(document.getElementById('statusIcon')),
+        explanation:  $(document.getElementById('explanation')),
+        chatModule:   $(document.getElementById('chatModule'))
       },
 
     // For getting the user count
@@ -18,24 +20,46 @@ var _BirdyCam = {
         $.get('/usercount', function (userData) {
           if (userData.count) $dom.userCount.html(userData.count);
         });
-      };
+      },
 
-    console.log('init BirdyCam', self);
+    // The function to run on interval
+      intervalFunction = function () {
+        // Update the user count
+        getUserCount();
+
+        // record that the user is there watching video, if ga is present
+        // track the analytics event, if ga is present
+        if (ga) ga('send', 'event', {
+          'eventCategory': 'Player',
+          'eventAction': 'Playing',
+          'nonInteraction': true
+        });
+      };
 
     // Get user count initially
     getUserCount();
 
-    // monitor for new users and adjust the counter accordingly
-    window.setInterval(getUserCount, 5000);
+    // monitor interval
+    window.setInterval(intervalFunction, 5000);
 
-    console.log('fullscreen:', $dom.fullscreen);
     // make the controls work
     $dom.fullscreen.on('click', function (eventObj) {
       if ($dom.player.hasClass('minPlayer')) {
         $dom.player.addClass('fullScreen').removeClass('minPlayer');
+        // hide the other stuff
+        $dom.explanation.hide();
+        $dom.chatModule.hide();
       } else {
         $dom.player.addClass('minPlayer').removeClass('fullScreen');
+        $dom.explanation.show();
+        $dom.chatModule.show();        
       }
+
+      // track the analytics event, if ga is present
+      if (ga) ga('send', 'event', {
+        'eventCategory': 'Player',
+        'eventAction': 'Fullscreen'
+      });
     });
 
     // Show the status of the video playback to the user
@@ -140,9 +164,17 @@ var _BirdyChat = {
 
       // Store the nickname
       saveNick(chatMessage.nickname);
-      console.log('sending chat message: ', chatMessage);
 
+      // track the analytics event, if ga is present
+      if (ga) ga('send', 'event', {
+        'eventCategory': 'Chat',
+        'eventAction': 'Message'
+      });
+
+      // Send the chat message through socket.io
       socket.emit('chat message', chatMessage);
+
+      // Clear the message box contents
       $dom.messageBox.val('');
       return false;
     });
